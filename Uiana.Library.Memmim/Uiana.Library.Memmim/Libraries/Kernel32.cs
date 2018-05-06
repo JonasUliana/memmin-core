@@ -35,7 +35,7 @@ namespace Uiana.Library.Memmim.Libraries {
         /// <returns></returns>
         [DllImport("kernel32.dll")]
         public static extern bool ReadProcessMemory(IntPtr hProcess,
-            int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);
+            UIntPtr lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);
 
         /// <summary>
         /// Usado para gravar dados em um processo remoto.
