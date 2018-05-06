@@ -99,5 +99,18 @@ namespace Uiana.Library.Memmim.Libraries {
         public static extern int CloseHandle(
             IntPtr hObject
         );
+
+        /// <summary>
+        /// Determina se o processo especificado está sendo executado no WOW64.
+        /// </summary>
+        /// <param name="hProcess">Um identificador para o processo.</param>
+        /// <param name="wow64Process">Um ponteiro para um valor definido como verdadeiro se o processo estiver sendo executado no WOW64.</param>
+        /// <returns>Se a função tiver êxito, o valor de retorno é um valor diferente de zero.</returns>
+        [DllImport("kernel32.dll", SetLastError = true, CallingConvention = CallingConvention.Winapi)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool IsWow64Process(
+            [In] IntPtr hProcess,
+            [Out] out bool wow64Process
+        );
     }
 }
