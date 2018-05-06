@@ -118,6 +118,7 @@ namespace Uiana.Library.Memmim {
         /// </summary>
         /// <param name="address">Endereço absoluto para escrita.</param>
         /// <param name="buffer">Tamanho do buffer da escrita.</param>
+        [Obsolete("A função PrimitiveWrite() está depreciada, utilize Write() em seu lugar.")]
         public PrimitiveMemoryWrite PrimitiveWrite(UIntPtr address, byte[] buffer) {
             var output = new PrimitiveMemoryWrite {
                 BufferWrited = buffer
@@ -138,13 +139,11 @@ namespace Uiana.Library.Memmim {
         /// </summary>
         /// <param name="address">Endereço absoluto para escrita.</param>
         /// <param name="write">Objeto a ser escrito.</param>
+        /// <param name="type">Assinatura de tipo do objeto que será escrito.</param>
         /// <returns>Se a função tiver exito, é retornado verdadeiro.</returns>
-        public bool Write(UIntPtr address, object write, Type type)
-        {
-            return
+        public bool Write(UIntPtr address, object write, Type type) =>
             WriteProcessMemory(Handle, address, _getByteArrayFromObject(write), 
                 (UIntPtr)Marshal.SizeOf(type), IntPtr.Zero);
-        }
 
         /// <summary>
         /// Suspende o processo manuseado nessa instância.
