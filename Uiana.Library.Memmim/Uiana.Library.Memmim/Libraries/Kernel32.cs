@@ -49,5 +49,31 @@ namespace Uiana.Library.Memmim.Libraries {
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool WriteProcessMemory(int hProcess, int lpBaseAddress,
             byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesWritten);
+
+        /// <summary>
+        /// Abre um objeto de thread existente.
+        /// </summary>
+        /// <param name="dwDesiredAccess">O acesso ao objeto de thread.</param>
+        /// <param name="bInheritHandle">Caso verdadeiro, os processos criados por esse processo herdarão o identificador.</param>
+        /// <param name="dwThreadId">O identificador do segmento a ser aberto.</param>
+        /// <returns>Se a função tiver êxito, o valor de retorno é um identificador aberto para o segmento especificado.</returns>
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr OpenThread(ThreadAccess dwDesiredAccess, bool bInheritHandle, uint dwThreadId);
+
+        /// <summary>
+        /// Um aplicativo de 64 bits pode suspender um thread WOW64 usando a função Wow64SuspendThread.
+        /// </summary>
+        /// <param name="hThread">Um identificador para o segmento que deve ser suspenso.</param>
+        /// <returns>Se a função for bem-sucedida, o valor de retorno é a contagem de suspensões anterior do thread; caso contrário, é (DWORD) -1.</returns>
+        [DllImport("kernel32.dll")]
+        public static extern uint SuspendThread(IntPtr hThread);
+
+        /// <summary>
+        /// Decrementa a contagem de suspensões de um thread. Quando a contagem suspensa é diminuída para zero, a execução do encadeamento é retomada.
+        /// </summary>
+        /// <param name="hThread">Um identificador para o segmento a ser reiniciado.</param>
+        /// <returns>Se a função for bem-sucedida, o valor de retorno é a contagem de suspensões anterior do encadeamento.</returns>
+        [DllImport("kernel32.dll")]
+        public static extern int ResumeThread(IntPtr hThread);
     }
 }
