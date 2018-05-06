@@ -93,7 +93,7 @@ namespace Uiana.Library.Memmim {
         /// </summary>
         /// <param name="address">Endereço absoluto para leitura.</param>
         /// <param name="bufferSize">Tamanho do buffer da leitura.</param>
-        public PrimitiveMemoryDump PrimitiveRead(IntPtr address, int bufferSize) {
+        public PrimitiveMemoryDump PrimitiveRead(UIntPtr address, int bufferSize) {
             var output = new PrimitiveMemoryDump {
                 Buffer = new byte[bufferSize],
                 BytesRead = 0,
@@ -114,7 +114,7 @@ namespace Uiana.Library.Memmim {
         /// </summary>
         /// <param name="address">Endereço absoluto para escrita.</param>
         /// <param name="buffer">Tamanho do buffer da escrita.</param>
-        public PrimitiveMemoryWrite PrimitiveWrite(IntPtr address, byte[] buffer) {
+        public PrimitiveMemoryWrite PrimitiveWrite(UIntPtr address, byte[] buffer) {
             var output = new PrimitiveMemoryWrite {
                 BufferWrited = buffer
             };
@@ -135,13 +135,9 @@ namespace Uiana.Library.Memmim {
         /// <param name="address">Endereço absoluto para escrita.</param>
         /// <param name="write">Valor a ser escrito.</param>
         /// <returns>Se a função tiver exito, é retornado verdadeiro.</returns>
-        public bool WriteByte(IntPtr address, byte write)
-        {
-            // TODO:
-            // Implementar função.
-            return false;
-        }
-
+        public bool WriteByte(UIntPtr address, byte write) =>
+            WriteProcessMemory(Handle, address, new[] {write}, (UIntPtr)sizeof(byte), IntPtr.Zero);
+       
         /// <summary>
         /// Suspende o processo manuseado nessa instância.
         /// </summary>
