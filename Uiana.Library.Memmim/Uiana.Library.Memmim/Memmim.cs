@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Diagnostics;
+using Uiana.Library.Memmim.Enums;
 using Uiana.Library.Memmim.Models;
 using static System.Diagnostics.Process;
 
@@ -85,5 +86,19 @@ namespace Uiana.Library.Memmim {
 
             return output;
         }
+
+        /// <summary>
+        /// Suspende o processo manuseado nessa instância.
+        /// </summary>
+        public void SuspendProcess() =>
+            Process
+                .Threads
+                .Cast<ProcessThread>()
+                .ToList()
+                .ForEach(t => {
+                    var opened = OpenThread(ThreadAccess.SuspendResume, false, (uint)t.Id);
+                    SuspendThread(opened);
+                    CloseHandle(opened);
+                });
     }
 }
