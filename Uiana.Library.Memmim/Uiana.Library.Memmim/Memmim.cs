@@ -42,11 +42,6 @@ namespace Uiana.Library.Memmim {
         /// </summary>
         public bool IsWow64 { get; private set; }
 
-        /// <summary>
-        /// Módulo principal de <see cref="Process"/>.
-        /// </summary>
-        public ProcessModule MainModule { get; private set; }
-
         #endregion
 
         /// <summary>
@@ -109,7 +104,7 @@ namespace Uiana.Library.Memmim {
             var temp = 0;
 
             ReadProcessMemory(Handle, address, output.Buffer,
-                output.Buffer.Length, ref temp);
+                output.Buffer.Length, ref temp);    
 
             output.BytesRead = temp;
 
