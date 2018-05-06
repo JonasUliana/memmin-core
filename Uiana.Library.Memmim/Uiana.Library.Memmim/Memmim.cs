@@ -29,18 +29,18 @@ namespace Uiana.Library.Memmim {
         /// <summary>
         /// Lista de módulos carregados e herdados por <see cref="Process"/>.
         /// </summary>
-        public Dictionary<string, IntPtr> Modules
-            = new Dictionary<string, IntPtr>();
+        public Dictionary<string, IntPtr> Modules { get; private set; } =
+        new Dictionary<string, IntPtr>();
 
         /// <summary>
         /// Módulo atualmente trabalhado pela instância.
         /// </summary>
-        public ProcessModule Module;
+        public ProcessModule Module { get; private set; }
 
         /// <summary>
         /// Módulo principal de <see cref="Process"/>.
         /// </summary>
-        public ProcessModule MainModule;
+        public ProcessModule MainModule { get; private set; }
 
         #endregion
 
@@ -62,6 +62,29 @@ namespace Uiana.Library.Memmim {
 
             Handle = OpenProcess(accessRoles,
                 false, Process.Id);
+
+            Module = Process.MainModule;
+
+            GetModules();
+        }
+
+        /// <summary>
+        /// Enumera os módulos carregado pela thread principal do processo.
+        /// </summary>
+        public void GetModules() {
+            if (Modules.Any())
+                Modules.Clear();
+
+            if (Process == null)
+                throw new ArgumentNullException(nameof(Process));
+
+            if (!string.IsNullOrEmpty(Module.ModuleName) &&
+                !Modules.ContainsKey(Module.ModuleName))
+                Modules
+                    .Cast<ProcessModule>()
+                    .ToList()
+                    .ForEach(m => Modules.Add(m.ModuleName,
+                        m.BaseAddress));
         }
 
         /// <summary>

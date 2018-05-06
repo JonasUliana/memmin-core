@@ -9,7 +9,7 @@ namespace Uiana.Library.Memmim.Sample {
             var address = 0x17BC722C;
 
             var memmim = new Memmim();
-            memmim.SetProcessPidByName(processName, ProcessAccessFlags.All);
+            memmim.SetProcessPidByName(processName, ProcessAccessFlags.VirtualMemoryRead);
 
             var readed = memmim.PrimitiveRead((IntPtr)address, sizeof(int));
 
@@ -21,17 +21,10 @@ namespace Uiana.Library.Memmim.Sample {
             WriteLine($"Lidos {readed.BytesRead} byte(s) do total de {readed.Buffer.Length} parametrizados");
             WriteLine($"Conteúdo: {BitConverter.ToInt32(readed.Buffer, 0)}");
 
-            WriteLine("Alterando valor...");
-            var bytes = BitConverter.GetBytes(999);
-            var readedAfterWrite = memmim.PrimitiveWrite((IntPtr)address, bytes);
-            WriteLine($"Conteúdo escrito: {readedAfterWrite.BytesWrited} byte(s)");
-
-
-            readed = memmim.PrimitiveRead((IntPtr)address, sizeof(int));
-            WriteLine($"Conteúdo: {BitConverter.ToInt32(readed.Buffer, 0)}");
-
+#if DEBUG
             WriteLine("Pressione uma tecla para sair...");
             ReadKey();
+#endif
         }
     }
 }
