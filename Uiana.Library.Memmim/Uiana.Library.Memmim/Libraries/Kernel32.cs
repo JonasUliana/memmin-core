@@ -48,6 +48,6 @@ namespace Uiana.Library.Memmim.Libraries {
         /// <returns>Se a função tiver êxito, o valor de retorno é diferente de zero.</returns>
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool WriteProcessMemory(int hProcess, int lpBaseAddress,
-            byte[] lpBuffer, long dwSize, ref int lpNumberOfBytesWritten);
+            byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesWritten);
     }
 }

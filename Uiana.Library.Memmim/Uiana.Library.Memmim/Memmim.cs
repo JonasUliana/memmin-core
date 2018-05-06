@@ -71,7 +71,7 @@ namespace Uiana.Library.Memmim {
         /// instânciado por <see cref="SetProcessPidByName"/>.
         /// </summary>
         /// <param name="address">Endereço absoluto para escrita.</param>
-        /// <param name="bufferSize">Tamanho do buffer da escrita.</param>
+        /// <param name="buffer">Tamanho do buffer da escrita.</param>
         public PrimitiveMemoryWrite PrimitiveWrite(int address, byte[] buffer) {
             var output = new PrimitiveMemoryWrite {
                 BufferWrited = buffer
