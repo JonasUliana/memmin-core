@@ -34,7 +34,7 @@ namespace Uiana.Library.Memmim.Libraries {
         /// <exception cref="Exception">Toda a área a ser lida deve estar acessível ou a operação falhará.</exception>
         /// <returns></returns>
         [DllImport("kernel32.dll")]
-        public static extern bool ReadProcessMemory(int hProcess,
+        public static extern bool ReadProcessMemory(IntPtr hProcess,
             int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);
 
         /// <summary>

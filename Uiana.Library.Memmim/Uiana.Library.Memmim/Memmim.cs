@@ -108,7 +108,7 @@ namespace Uiana.Library.Memmim {
             };
             var temp = 0;
 
-            ReadProcessMemory((int)Handle, (int)address, output.Buffer,
+            ReadProcessMemory(Handle, (int)address, output.Buffer,
                 output.Buffer.Length, ref temp);
 
             output.BytesRead = temp;
