@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using Uiana.Library.Memmim.Enums;
 
 namespace Uiana.Library.Memmim.Libraries {
     /// <summary>
@@ -19,7 +20,7 @@ namespace Uiana.Library.Memmim.Libraries {
         /// <param name="dwProcessId">O identificador do processo local a ser aberto.</param>
         /// <returns>Se a função for bem-sucedida, o valor de retorno será um identificador aberto para o processo especificado.</returns>
         [DllImport("kernel32.dll")]
-        public static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
+        public static extern IntPtr OpenProcess(ProcessAccessFlags dwDesiredAccess, bool bInheritHandle, int dwProcessId);
 
         /// <summary>
         /// Lê dados de uma área de memória em um processo especificado.

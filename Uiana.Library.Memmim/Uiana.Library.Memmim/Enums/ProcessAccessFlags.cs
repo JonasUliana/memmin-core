@@ -7,7 +7,7 @@ namespace Uiana.Library.Memmim.Enums
     /// processo remoto.
     /// </summary>
     [Flags]
-    public enum ProcessAccessFlags
+    public enum ProcessAccessFlags : uint
     {
         All = 0x001F0FFF,
         Terminate = 0x00000001,

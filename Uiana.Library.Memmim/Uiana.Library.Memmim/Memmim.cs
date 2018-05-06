@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using static System.Diagnostics.Process;
-using System.Threading.Tasks;
+
+using static Uiana.Library.Memmim.Libraries.Kernel32;
+using static Uiana.Library.Memmim.Enums.ProcessAccessFlags;
 
 namespace Uiana.Library.Memmim {
     /// <summary>
@@ -17,6 +17,11 @@ namespace Uiana.Library.Memmim {
         /// Instância de processo remota atualmente consumida.
         /// </summary>
         public Process Process { get; private set; }
+
+        /// <summary>
+        /// Handle da thread primária de <see cref="Process"/>.
+        /// </summary>
+        public IntPtr Handle { get; private set; }
 
         #endregion
 
@@ -31,6 +36,12 @@ namespace Uiana.Library.Memmim {
                 .Where(p => p.ProcessName == signature)
                 .Select(p => p)
                 .FirstOrDefault();
+
+            if (Process == null)
+                throw new NullReferenceException($"Processo não encontrado com a assinatura de nome \"{signature}\".");
+
+            Handle = OpenProcess(VirtualMemoryRead | VirtualMemoryRead,
+                false, Process.Id);
         }
     }
 }
