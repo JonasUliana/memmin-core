@@ -21,7 +21,7 @@ namespace Uiana.Library.Memmim.Sample {
             WriteLine($"Conteúdo: {BitConverter.ToInt32(readed.Buffer, 0)}");
 
             WriteLine("Alterando valor...");
-            var bytes = BitConverter.GetBytes(9999);
+            var bytes = BitConverter.GetBytes(999);
             var readedAfterWrite = memmim.PrimitiveWrite(address, bytes);
             WriteLine($"Conteúdo escrito: {readedAfterWrite.BytesWrited} byte(s)");
 
