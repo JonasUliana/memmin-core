@@ -14,6 +14,16 @@ Existe um pequeno exemplo dentro do diretório de solução `Uiana.Library.Memmi
 
 > Nota: A aplicação de testes necessita de uma instância com privilégios elevados para depuração.
 
+
+
+### Dependências
+
+Para compilar, e gerar uma build da bilbioteca é necessário um ambiente de desenvolvimento com o .NET Framework 4.6 ou superior instalado na maquina host, juntamente com o utilitário completo do MSBUILD.
+
+> Windows XP SP1 **é somente suportado na [versão 0.0.0.1](https://github.com/JonasUliana/memmin-core/releases/tag/0.0.0.1)**
+
+
+
 ### Contribuição
 
 Toda e qualquer contribuição é bem vinda, desde a criação de uma *issue* até seu PR, que é muito bem aceito, especialmente em contribuições de programação dinâmica para notação dos tipos enumerados da leitura.
