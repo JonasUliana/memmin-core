@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uiana.Library.Memmim", "Uiana.Library.Memmim\Uiana.Library.Memmim.csproj", "{4554AEF8-5DD3-4C56-BA5B-1844EAA1B80F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4554AEF8-5DD3-4C56-BA5B-1844EAA1B80F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4554AEF8-5DD3-4C56-BA5B-1844EAA1B80F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4554AEF8-5DD3-4C56-BA5B-1844EAA1B80F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4554AEF8-5DD3-4C56-BA5B-1844EAA1B80F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B472587-C9EC-47F9-8671-B9B2F5380BE7}
+	EndGlobalSection
+EndGlobal
