@@ -100,5 +100,22 @@ namespace Uiana.Library.Memmim {
                     SuspendThread(opened);
                     CloseHandle(opened);
                 });
+
+        /// <summary>
+        /// Retoma o processo manuseado nessa instância.
+        /// </summary>
+        public void ResumeProcess() =>
+            Process
+                .Threads
+                .Cast<ProcessThread>()
+                .ToList()
+                .ForEach(t => {
+                    var opened = OpenThread(ThreadAccess.SuspendResume, false, (uint)t.Id);
+                    int toResume;
+                    do {
+                        toResume = ResumeThread(opened);
+                    } while (toResume > 0);
+                    CloseHandle(opened);
+                });
     }
 }
