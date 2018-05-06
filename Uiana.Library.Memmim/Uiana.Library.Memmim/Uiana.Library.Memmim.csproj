@@ -43,8 +43,7 @@
     <Compile Include="Enums\ProcessAccessFlags.cs" />
     <Compile Include="Libraries\Kernel32.cs" />
     <Compile Include="Memmim.cs" />
-    <Compile Include="Models\Primitive64BitsMemoryDump.cs" />
-    <Compile Include="Models\Primitive32BitsMemoryDump.cs" />
+    <Compile Include="Models\PrimitiveMemoryDump.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

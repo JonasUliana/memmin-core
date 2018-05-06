@@ -2,14 +2,14 @@
     /// <summary>
     /// Indexa informações sobre um dump de memória primitivo.
     /// </summary>
-    public class Primitive32BitsMemoryDump {
+    public class PrimitiveMemoryDump {
         /// <summary>
         /// Tamanho do dump.
         /// <para>
         /// Nota: Valor em bytes.
         /// </para>
         /// </summary>
-        public long BytesRead { get; set; }
+        public int BytesRead { get; set; }
 
         /// <summary>
         /// Tamanho do dump.

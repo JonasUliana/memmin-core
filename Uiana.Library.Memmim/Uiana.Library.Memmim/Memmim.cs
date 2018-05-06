@@ -46,41 +46,20 @@ namespace Uiana.Library.Memmim {
         }
 
         /// <summary>
-        /// Realiza a leitura de um enderço de até 32 bits no processo
+        /// Realiza a leitura de um enderço de até N bits no processo
         /// instânciado por <see cref="SetProcessPidByName"/>.
         /// </summary>
         /// <param name="address">Endereço absoluto para escrita.</param>
         /// <param name="bufferSize">Tamanho do buffer da escrita.</param>
-        public Primitive32BitsMemoryDump PrimitiveRead32Bits(IntPtr address, long bufferSize) {
-            var output = new Primitive32BitsMemoryDump
+        public PrimitiveMemoryDump PrimitiveRead(int address, ulong bufferSize) {
+            var output = new PrimitiveMemoryDump
             {
                 Buffer = new byte[bufferSize],
                 BytesRead = 0,
             };
-            ulong temp = 0;
+            int temp = 0;
 
             ReadProcessMemory((int)Handle, address, output.Buffer, 
-                output.Buffer.Length, ref temp);
-
-            output.BytesRead = (long)temp;
-
-            return output;
-        }
-
-        /// <summary>
-        /// Realiza a leitura de um enderço de até 64 bits no processo
-        /// instânciado por <see cref="SetProcessPidByName"/>.
-        /// </summary>
-        /// <param name="address">Endereço absoluto para escrita.</param>
-        /// <param name="bufferSize">Tamanho do buffer da escrita.</param>
-        public Primitive64BitsMemoryDump PrimitiveRead64Bits(IntPtr address, uint bufferSize) {
-            var output = new Primitive64BitsMemoryDump {
-                Buffer = new byte[bufferSize],
-                BytesRead = 0,
-            };
-            ulong temp = 0;
-
-            ReadProcessMemory((int)Handle, address, output.Buffer,
                 output.Buffer.Length, ref temp);
 
             output.BytesRead = temp;

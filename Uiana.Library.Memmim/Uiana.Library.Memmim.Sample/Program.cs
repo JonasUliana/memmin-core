@@ -10,7 +10,7 @@ namespace Uiana.Library.Memmim.Sample {
             var memmim = new Memmim();
             memmim.SetProcessPidByName(processName);
 
-            var readed = memmim.PrimitiveRead64Bits((IntPtr)address, 12);
+            var readed = memmim.PrimitiveRead(address, 12);
 
             WriteLine($"Lidos {readed.BytesRead} byte(s) do total de {readed.Buffer.Length} parametrizados");
 
