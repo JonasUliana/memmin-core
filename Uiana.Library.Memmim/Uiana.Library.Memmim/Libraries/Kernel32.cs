@@ -51,6 +51,20 @@ namespace Uiana.Library.Memmim.Libraries {
             byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesWritten);
 
         /// <summary>
+        /// Usado para gravar dados em um processo remoto.
+        /// </summary>
+        /// <param name="hProcess">Um identificador para a memória do processo a ser modificada.</param>
+        /// <param name="lpBaseAddress">Um ponteiro para o endereço base no processo especificado no qual os dados são gravados.</param>
+        /// <param name="lpBuffer">Um ponteiro para o buffer que contém dados a serem gravados no espaço de endereço do processo especificado.</param>
+        /// <param name="nSize">O número de bytes a serem gravados no processo especificado.</param>
+        /// <param name="lpNumberOfBytesWritten">Um ponteiro para uma variável que recebe o número de bytes transferidos para o processo especificado.</param>
+        /// <returns>Se a função tiver êxito, o valor de retorno é diferente de zero.</returns>
+        [DllImport("kernel32.dll")]
+        public static extern bool WriteProcessMemory(IntPtr hProcess, 
+            UIntPtr lpBaseAddress, byte[] lpBuffer, UIntPtr nSize, 
+            IntPtr lpNumberOfBytesWritten);
+
+        /// <summary>
         /// Abre um objeto de thread existente.
         /// </summary>
         /// <param name="dwDesiredAccess">O acesso ao objeto de thread.</param>

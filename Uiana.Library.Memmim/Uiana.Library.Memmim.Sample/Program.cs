@@ -1,16 +1,17 @@
 ﻿using System;
+using Uiana.Library.Memmim.Enums;
 using static System.Console;
 
 namespace Uiana.Library.Memmim.Sample {
     class Program {
         static void Main() {
             var processName = "DigOrDie";
-            var address = 0x152A72C4;
+            var address = 0x17BC722C;
 
             var memmim = new Memmim();
-            memmim.SetProcessPidByName(processName);
+            memmim.SetProcessPidByName(processName, ProcessAccessFlags.All);
 
-            var readed = memmim.PrimitiveRead(address, sizeof(int));
+            var readed = memmim.PrimitiveRead((IntPtr)address, sizeof(int));
 
             // Caso o sistema for little-endian, o array de bytes precisa
             // ser invertido.
@@ -22,16 +23,15 @@ namespace Uiana.Library.Memmim.Sample {
 
             WriteLine("Alterando valor...");
             var bytes = BitConverter.GetBytes(999);
-            var readedAfterWrite = memmim.PrimitiveWrite(address, bytes);
+            var readedAfterWrite = memmim.PrimitiveWrite((IntPtr)address, bytes);
             WriteLine($"Conteúdo escrito: {readedAfterWrite.BytesWrited} byte(s)");
 
 
-            readed = memmim.PrimitiveRead(address, sizeof(int));
+            readed = memmim.PrimitiveRead((IntPtr)address, sizeof(int));
             WriteLine($"Conteúdo: {BitConverter.ToInt32(readed.Buffer, 0)}");
-#if DEBUG
+
             WriteLine("Pressione uma tecla para sair...");
             ReadKey();
-#endif
         }
     }
 }

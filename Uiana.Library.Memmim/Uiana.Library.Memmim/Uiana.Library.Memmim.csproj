@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\ProcessAccessFlags.cs" />
+    <Compile Include="Enums\ThreadAccess.cs" />
     <Compile Include="Libraries\Kernel32.cs" />
     <Compile Include="Memmim.cs" />
     <Compile Include="Models\PrimitiveMemoryWrite.cs" />

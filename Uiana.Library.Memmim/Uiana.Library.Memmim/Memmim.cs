@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
 using Uiana.Library.Memmim.Enums;
@@ -25,6 +26,22 @@ namespace Uiana.Library.Memmim {
         /// </summary>
         public IntPtr Handle { get; private set; }
 
+        /// <summary>
+        /// Lista de módulos carregados e herdados por <see cref="Process"/>.
+        /// </summary>
+        public Dictionary<string, IntPtr> Modules
+            = new Dictionary<string, IntPtr>();
+
+        /// <summary>
+        /// Módulo atualmente trabalhado pela instância.
+        /// </summary>
+        public ProcessModule Module;
+
+        /// <summary>
+        /// Módulo principal de <see cref="Process"/>.
+        /// </summary>
+        public ProcessModule MainModule;
+
         #endregion
 
         /// <summary>
@@ -32,17 +49,18 @@ namespace Uiana.Library.Memmim {
         /// especificada na função.
         /// </summary>
         /// <param name="signature">No do processo que irá ser indexado.</param>
-        public void SetProcessPidByName(string signature)
+        /// <param name="accessRoles">Lista de roles necessárias para manejo do processo.</param>
+        public void SetProcessPidByName(string signature, ProcessAccessFlags accessRoles)
         {
             Process = GetProcessesByName(signature ?? throw new ArgumentException(nameof(signature)))
                 .Where(p => p.ProcessName == signature)
                 .Select(p => p)
                 .FirstOrDefault();
-
+            
             if (Process == null)
                 throw new NullReferenceException($"Processo não encontrado com a assinatura de nome \"{signature}\".");
 
-            Handle = OpenProcess(VirtualMemoryRead | VirtualMemoryRead,
+            Handle = OpenProcess(accessRoles,
                 false, Process.Id);
         }
 
@@ -52,14 +70,14 @@ namespace Uiana.Library.Memmim {
         /// </summary>
         /// <param name="address">Endereço absoluto para leitura.</param>
         /// <param name="bufferSize">Tamanho do buffer da leitura.</param>
-        public PrimitiveMemoryDump PrimitiveRead(int address, int bufferSize) {
+        public PrimitiveMemoryDump PrimitiveRead(IntPtr address, int bufferSize) {
             var output = new PrimitiveMemoryDump {
                 Buffer = new byte[bufferSize],
                 BytesRead = 0,
             };
             var temp = 0;
 
-            ReadProcessMemory((int)Handle, address, output.Buffer,
+            ReadProcessMemory((int)Handle, (int)address, output.Buffer,
                 output.Buffer.Length, ref temp);
 
             output.BytesRead = temp;
@@ -73,18 +91,32 @@ namespace Uiana.Library.Memmim {
         /// </summary>
         /// <param name="address">Endereço absoluto para escrita.</param>
         /// <param name="buffer">Tamanho do buffer da escrita.</param>
-        public PrimitiveMemoryWrite PrimitiveWrite(int address, byte[] buffer) {
+        public PrimitiveMemoryWrite PrimitiveWrite(IntPtr address, byte[] buffer) {
             var output = new PrimitiveMemoryWrite {
                 BufferWrited = buffer
             };
             var temp = 0;
 
-            WriteProcessMemory((int)Handle, address, buffer,
+            WriteProcessMemory((int)Handle, (int)address, buffer,
                 buffer.Length, ref temp);
 
             output.BytesWrited = temp;
 
             return output;
+        }
+
+        /// <summary>
+        /// Realiza a gravação de um byte de um endereço na memória
+        /// no processo instânciado por <see cref="SetProcessPidByName"/>.
+        /// </summary>
+        /// <param name="address">Endereço absoluto para escrita.</param>
+        /// <param name="write">Valor a ser escrito.</param>
+        /// <returns>Se a função tiver exito, é retornado verdadeiro.</returns>
+        public bool WriteByte(IntPtr address, byte write)
+        {
+            // TODO:
+            // Implementar função.
+            return false;
         }
 
         /// <summary>
