@@ -20,6 +20,9 @@ namespace Uiana.Library.Memmim.Sample {
                 Array.Reverse(readed.Buffer);
 
             WriteLine($"Conteúdo: {BitConverter.ToInt64(readed.Buffer, 0)}");
+            WriteLine("Alterando valor...");
+            var bytes = BitConverter.GetBytes(99999);
+            var readedAfterWrite = memmim.PrimitiveWrite(address, 12);
 #if DEBUG
             WriteLine("Pressione uma tecla para sair...");
             ReadKey();

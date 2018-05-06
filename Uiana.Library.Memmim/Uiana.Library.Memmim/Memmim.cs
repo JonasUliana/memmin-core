@@ -72,17 +72,16 @@ namespace Uiana.Library.Memmim {
         /// </summary>
         /// <param name="address">Endereço absoluto para escrita.</param>
         /// <param name="bufferSize">Tamanho do buffer da escrita.</param>
-        public PrimitiveMemoryDump PrimitiveWrite(int address, int bufferSize) {
-            var output = new PrimitiveMemoryDump {
-                Buffer = new byte[bufferSize],
-                BytesRead = 0,
+        public PrimitiveMemoryWrite PrimitiveWrite(int address, byte[] buffer) {
+            var output = new PrimitiveMemoryWrite {
+                BufferWrited = buffer
             };
             var temp = 0;
 
-            WriteProcessMemory((int)Handle, address, output.Buffer,
-                output.Buffer.Length, ref temp);
+            WriteProcessMemory((int)Handle, address, buffer,
+                buffer.Length, ref temp);
 
-            output.BytesRead = temp;
+            output.BytesWrited = temp;
 
             return output;
         }
