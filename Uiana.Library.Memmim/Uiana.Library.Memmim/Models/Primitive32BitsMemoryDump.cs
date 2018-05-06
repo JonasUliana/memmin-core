@@ -9,14 +9,6 @@
         /// Nota: Valor em bytes.
         /// </para>
         /// </summary>
-        public long Size { get; set; }
-
-        /// <summary>
-        /// Tamanho do dump.
-        /// <para>
-        /// Nota: Valor em bytes.
-        /// </para>
-        /// </summary>
         public long BytesRead { get; set; }
 
         /// <summary>

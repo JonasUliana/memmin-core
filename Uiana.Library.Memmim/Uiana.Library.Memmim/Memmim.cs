@@ -56,7 +56,6 @@ namespace Uiana.Library.Memmim {
             {
                 Buffer = new byte[bufferSize],
                 BytesRead = 0,
-                Size = 0
             };
             ulong temp = 0;
 
@@ -78,7 +77,6 @@ namespace Uiana.Library.Memmim {
             var output = new Primitive64BitsMemoryDump {
                 Buffer = new byte[bufferSize],
                 BytesRead = 0,
-                Size = 0
             };
             ulong temp = 0;
 

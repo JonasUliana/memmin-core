@@ -9,14 +9,6 @@
         /// Nota: Valor em bytes.
         /// </para>
         /// </summary>
-        public ulong Size { get; set; }
-
-        /// <summary>
-        /// Tamanho do dump.
-        /// <para>
-        /// Nota: Valor em bytes.
-        /// </para>
-        /// </summary>
         public ulong BytesRead { get; set; }
 
         /// <summary>
