@@ -49,17 +49,37 @@ namespace Uiana.Library.Memmim {
         /// Realiza a leitura de um enderço de até N bits no processo
         /// instânciado por <see cref="SetProcessPidByName"/>.
         /// </summary>
-        /// <param name="address">Endereço absoluto para escrita.</param>
-        /// <param name="bufferSize">Tamanho do buffer da escrita.</param>
-        public PrimitiveMemoryDump PrimitiveRead(int address, ulong bufferSize) {
-            var output = new PrimitiveMemoryDump
-            {
+        /// <param name="address">Endereço absoluto para leitura.</param>
+        /// <param name="bufferSize">Tamanho do buffer da leitura.</param>
+        public PrimitiveMemoryDump PrimitiveRead(int address, int bufferSize) {
+            var output = new PrimitiveMemoryDump {
                 Buffer = new byte[bufferSize],
                 BytesRead = 0,
             };
-            int temp = 0;
+            var temp = 0;
 
-            ReadProcessMemory((int)Handle, address, output.Buffer, 
+            ReadProcessMemory((int)Handle, address, output.Buffer,
+                output.Buffer.Length, ref temp);
+
+            output.BytesRead = temp;
+
+            return output;
+        }
+
+        /// <summary>
+        /// Realiza a gravação de um enderço de até N bits no processo
+        /// instânciado por <see cref="SetProcessPidByName"/>.
+        /// </summary>
+        /// <param name="address">Endereço absoluto para escrita.</param>
+        /// <param name="bufferSize">Tamanho do buffer da escrita.</param>
+        public PrimitiveMemoryDump PrimitiveWrite(int address, int bufferSize) {
+            var output = new PrimitiveMemoryDump {
+                Buffer = new byte[bufferSize],
+                BytesRead = 0,
+            };
+            var temp = 0;
+
+            WriteProcessMemory((int)Handle, address, output.Buffer,
                 output.Buffer.Length, ref temp);
 
             output.BytesRead = temp;

@@ -47,7 +47,7 @@ namespace Uiana.Library.Memmim.Libraries {
         /// <param name="lpNumberOfBytesWritten">Um ponteiro para uma variável que recebe o número de bytes transferidos para o processo especificado.</param>
         /// <returns>Se a função tiver êxito, o valor de retorno é diferente de zero.</returns>
         [DllImport("kernel32.dll", SetLastError = true)]
-        static extern bool WriteProcessMemory(int hProcess, int lpBaseAddress,
-            byte[] lpBuffer, long dwSize, ref ulong lpNumberOfBytesWritten);
+        public static extern bool WriteProcessMemory(int hProcess, int lpBaseAddress,
+            byte[] lpBuffer, long dwSize, ref int lpNumberOfBytesWritten);
     }
 }
