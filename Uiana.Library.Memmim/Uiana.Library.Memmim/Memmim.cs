@@ -38,6 +38,11 @@ namespace Uiana.Library.Memmim {
         public ProcessModule Module { get; private set; }
 
         /// <summary>
+        /// Define se o processo é executado na WOW64.
+        /// </summary>
+        public bool IsWow64 { get; private set; }
+
+        /// <summary>
         /// Módulo principal de <see cref="Process"/>.
         /// </summary>
         public ProcessModule MainModule { get; private set; }
@@ -62,6 +67,9 @@ namespace Uiana.Library.Memmim {
 
             Handle = OpenProcess(accessRoles,
                 false, Process.Id);
+
+            IsWow64Process(Handle, out var tempBool);
+            IsWow64 = tempBool;
 
             Module = Process.MainModule;
 
