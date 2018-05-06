@@ -75,5 +75,15 @@ namespace Uiana.Library.Memmim.Libraries {
         /// <returns>Se a função for bem-sucedida, o valor de retorno é a contagem de suspensões anterior do encadeamento.</returns>
         [DllImport("kernel32.dll")]
         public static extern int ResumeThread(IntPtr hThread);
+
+        /// <summary>
+        /// Fecha o handle de um objeto aberto.
+        /// </summary>
+        /// <param name="hObject">Um identificador válido para um objeto aberto.</param>
+        /// <returns>Se a função tiver êxito, o valor de retorno é diferente de zero.</returns>
+        [DllImport("kernel32.dll")]
+        public static extern int CloseHandle(
+            IntPtr hObject
+        );
     }
 }
