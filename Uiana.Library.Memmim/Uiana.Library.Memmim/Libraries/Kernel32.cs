@@ -34,6 +34,6 @@ namespace Uiana.Library.Memmim.Libraries {
         /// <returns></returns>
         [DllImport("kernel32.dll")]
         public static extern bool ReadProcessMemory(int hProcess,
-            int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);
+            IntPtr lpBaseAddress, byte[] lpBuffer, int dwSize, ref ulong lpNumberOfBytesRead);
     }
 }
