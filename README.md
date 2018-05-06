@@ -20,7 +20,7 @@ Existe um pequeno exemplo dentro do diretório de solução `Uiana.Library.Memmi
 
 Para compilar, e gerar uma build da bilbioteca é necessário um ambiente de desenvolvimento com o .NET Framework 4.6 ou superior instalado na maquina host, juntamente com o utilitário completo do MSBUILD.
 
-> Windows XP SP1 **é somente suportado na [versão 0.0.0.1](https://github.com/JonasUliana/memmin-core/releases/tag/0.0.0.1)**
+> Windows XP SP1 e Windows Server 2003 **é somente suportado na [versão 0.0.0.1](https://github.com/JonasUliana/memmin-core/releases/tag/0.0.0.1)**, devido a limitações de API fornecidas por kernel32.
 
 
 
