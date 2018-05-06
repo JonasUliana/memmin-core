@@ -112,5 +112,22 @@ namespace Uiana.Library.Memmim.Libraries {
             [In] IntPtr hProcess,
             [Out] out bool wow64Process
         );
+
+        /// <summary>
+        /// Lê dados de uma área de memória em um processo especificado.
+        /// </summary>
+        /// <param name="hProcess">Um identificador para o processo com memória que está sendo lida.</param>
+        /// <param name="lpBaseAddress">Um ponteiro para o endereço base no processo especificado do qual ler.</param>
+        /// <param name="lpBuffer">Um ponteiro para um buffer que recebe o conteúdo do espaço de endereço do processo especificado.</param>
+        /// <param name="nSize">O número de bytes a serem lidos do processo especificado.</param>
+        /// <param name="lpNumberOfBytesRead">Um ponteiro para uma variável que recebe o número de bytes transferidos para o buffer especificado.</param>
+        /// <exception cref="Exception">Toda a área a ser lida deve estar acessível ou a operação falhará.</exception>
+        /// <returns>Se a função tiver êxito, o valor de retorno é um valor diferente de zero.</returns>
+        [DllImport("kernel32.dll")]
+        public static extern bool ReadProcessMemory(IntPtr hProcess,
+            UIntPtr lpBaseAddress,
+            [Out] byte[] lpBuffer,
+            UIntPtr nSize,
+            IntPtr lpNumberOfBytesRead);
     }
 }
