@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using Uiana.Library.Memmim.Enums;
 using Uiana.Library.Memmim.Models;
 using static System.Diagnostics.Process;
@@ -136,11 +137,15 @@ namespace Uiana.Library.Memmim {
         /// no processo instânciado por <see cref="SetProcessPidByName"/>.
         /// </summary>
         /// <param name="address">Endereço absoluto para escrita.</param>
-        /// <param name="write">Valor a ser escrito.</param>
+        /// <param name="write">Objeto a ser escrito.</param>
         /// <returns>Se a função tiver exito, é retornado verdadeiro.</returns>
-        public bool WriteByte(UIntPtr address, byte write) =>
-            WriteProcessMemory(Handle, address, new[] {write}, (UIntPtr)sizeof(byte), IntPtr.Zero);
-       
+        public bool Write(UIntPtr address, object write, Type type)
+        {
+            return
+            WriteProcessMemory(Handle, address, _getByteArrayFromObject(write), 
+                (UIntPtr)Marshal.SizeOf(type), IntPtr.Zero);
+        }
+
         /// <summary>
         /// Suspende o processo manuseado nessa instância.
         /// </summary>
@@ -171,5 +176,30 @@ namespace Uiana.Library.Memmim {
                     } while (toResume > 0);
                     CloseHandle(opened);
                 });
+
+        #region Helper
+
+        private readonly Func<object, byte[]> _getByteArrayFromObject = obj => {
+            var size = Marshal.SizeOf(obj);
+            var bytes = new byte[size];
+            var ptr = Marshal.AllocHGlobal(size);
+            Marshal.StructureToPtr(obj, ptr, false);
+            Marshal.Copy(ptr, bytes, 0, size);
+            Marshal.FreeHGlobal(ptr);
+            return bytes;
+        };
+
+        #endregion
+
+        /// <summary>
+        /// Converte um array de bytes em um objeto de determinado tipo.
+        /// </summary>
+        public Func<byte[], Type, object> GetObjectFromByteArray = (b, t) => {
+            var ptr = Marshal.AllocHGlobal(b.Length);
+            Marshal.Copy(b, 0, ptr, b.Length);
+            var desserialized = Marshal.PtrToStructure(ptr, t);
+            Marshal.FreeHGlobal(ptr);
+            return desserialized;
+        };
     }
 }
